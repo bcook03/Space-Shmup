@@ -7,10 +7,12 @@ public class BoundsCheck : MonoBehaviour
     [Header("Inscribed")]
     public eType boundsType = eType.center;
     public float radius = 1f;
+    public bool keepOnScreen = true;
 
     [Header("Dynamic")]
     public float camWidth;
     public float camHeight;
+    public bool isOnScreen = true;
     /// <summary>
     /// Keeps a GameObject on screen.
     /// Note that this ONLY works for an orhographic Main Camera
@@ -28,30 +30,31 @@ public class BoundsCheck : MonoBehaviour
         if (boundsType == eType.outset) checkRadius = radius;
 
         Vector3 pos = transform.position;
+        isOnScreen = true;
 
         // restrict the X position to camWidth
-        if (pos.x > camWidth + checkRadius)
+        if (pos.x > camWidth + checkRadius){
             pos.x = camWidth + checkRadius;
-        if (pos.x < -camWidth - checkRadius)
+            isOnScreen = false;
+        }
+        if (pos.x < -camWidth - checkRadius){
             pos.x = -camWidth - checkRadius;
-        
+            isOnScreen = false;
+        }
         // Restrict the Y position to cmaHeight
-        if (pos.y > camHeight + checkRadius)
+        if (pos.y > camHeight + checkRadius){
             pos.y = camHeight + checkRadius;
-        if (pos.y < -camHeight - checkRadius)
+            isOnScreen = false;
+        }
+        if (pos.y < -camHeight - checkRadius){
             pos.y = -camHeight - checkRadius;
+            isOnScreen = false;
+        }
 
-        transform.position = pos;
+        if (keepOnScreen && !isOnScreen){
+            transform.position = pos;
+            isOnScreen = true;
+        }
     }
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
