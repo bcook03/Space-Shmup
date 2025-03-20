@@ -333,8 +333,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boundsType: 1
   radius: 4
+  keepOnScreen: 1
   camWidth: 0
   camHeight: 0
+  isOnScreen: 1
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,6 +694,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2915222472983652562, guid: b913aefbb13524b4f9a79884a45099ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110853522100903603, guid: b913aefbb13524b4f9a79884a45099ee, type: 3}
+      propertyPath: keepOnScreen
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
