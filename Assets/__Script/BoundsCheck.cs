@@ -6,7 +6,7 @@ public class BoundsCheck : MonoBehaviour
 
     [Header("Inscribed")]
     public eType boundsType = eType.center;
-    public floar radius = 1f;
+    public float radius = 1f;
 
     [Header("Dynamic")]
     public float camWidth;
