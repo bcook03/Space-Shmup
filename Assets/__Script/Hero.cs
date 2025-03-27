@@ -70,9 +70,9 @@ public class Hero : MonoBehaviour
             shieldLevel--;
             Destroy(go);
         }
-        else {
-            Debug.LogWarning("Shield trigger hit by non-Enemy: "+go.name);
-        }
+        // else {
+        //     Debug.LogWarning("Shield trigger hit by non-Enemy: "+go.name);
+        // }
     }
 
     public float shieldLevel {
