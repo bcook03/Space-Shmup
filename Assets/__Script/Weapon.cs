@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 /// <summary>
 /// This is an enum of the various possible weapon types.
@@ -77,7 +76,7 @@ public class Weapon : MonoBehaviour
 
     }
 
-    public eWeaponType tyoe {
+    public eWeaponType type {
         get {   return(_type);  }
         set {   SetType(value); }
     }
@@ -143,6 +142,6 @@ public class Weapon : MonoBehaviour
         p.type = _type;
         nextShotTime = Time.time + def.delayBetweenShots;
         return(p);
-        
+
     }
 }

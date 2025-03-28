@@ -31,4 +31,19 @@ public class Utils : MonoBehaviour
         return vArr[0,0];
     }
 
+    //== Materials Functions ===============================================================\\
+
+    /// <summary>
+    ///  Returns a list of all Materials on this GameObject and its children
+    /// </summary>
+    /// <param name="go">The GameObject on whicdh to search for Renderers</param>
+    static public Material[] GetAllMaterials( GameObject go ) {
+        Renderer[] rend = go.GetComponentsInChildren<Renderer>();
+
+        Material[] mats = new Material[rend.Length];
+        for (int i = 0; i < rend.Length; i++)
+            mats[i] = rend[i].material;
+
+        return mats;
+    }
 }
