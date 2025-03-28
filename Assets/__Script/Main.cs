@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build.Reporting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
     static private Main S;
+    static private Dictionary<eWeaponType, WeaponDefinition> WEAP_DICT;
 
     [Header("Inscribed")]
+    public bool spawnEnemies = true;
     public GameObject[] prefabEnemies;
     public float enemySpawnPerSecond = 0.5f;
     public float enemyInsetDefault = 1.5f;
     public float gameRestartDelay = 2;
+    public WeaponDefinition[] weaponDefinitions;
 
     private BoundsCheck bndCheck;
 
@@ -21,11 +25,23 @@ public class Main : MonoBehaviour
         // Set bndCheck to reference the BoundsCheck component on this GameObject
         bndCheck = GetComponent<BoundsCheck>();
 
-        // Invokde SpawnEnmy() once (in 2 seconds, based on default values)
-        Invoke( nameof(SpawnEnemy), 1f/enemySpawnPerSecond);    
+        // Invoke SpawnEnmy() once (in 2 seconds, based on default values)
+        Invoke( nameof(SpawnEnemy), 1f/enemySpawnPerSecond);
+
+        // A generic Dictionary with eWeaponType as the key
+        WEAP_DICT = new Dictionary<eWeaponType, WeaponDefinition>();
+        foreach (WeaponDefinition def in weaponDefinitions) {
+            WEAP_DICT[def.type] = def;
+        }
     }
 
     public void SpawnEnemy() {
+        // If spawnEnmeies is false, skip to the next invoke of SpawnEnemy()
+        if (!spawnEnemies) {
+            Invoke(nameof(SpawnEnemy), 1f / enemySpawnPerSecond);
+            return;
+        }
+
         // Pick a random Enemy prefab to instantiate
         int ndx = Random.Range(0, prefabEnemies.Length);
         GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]);
@@ -58,7 +74,26 @@ public class Main : MonoBehaviour
     }
 
     static public void HERO_DIED() {
+
         S.DelayedRestart();
     }
+    
+    /// <summary>
+    /// Static function that gets a WeaponDefintition from the WEAP_DICT static
+    /// protected field of the Main class.
+    /// </summary>
+    /// <returns> The WeaponDefinitionn, or if there is no WeaponDefinition with 
+    /// the eWeaponType passed in, returns a new WeaponDefinition with a 
+    /// eWEaponType of eWeaponType.none</returns>
+    /// <param name = "wt"> The eWeaponType of the desired WeaponDefinition</param>
+    static public WeaponDefinition GET_WEAPON_DEFINITION(eWeaponType wt) {
+        if (WEAP_DICT.ContainsKey(wt)){
+            return ( WEAP_DICT[wt]);
+        }
+        // If no entry of thje correct tpye exists in WEAP_DICT, return a new
+        // WeaponDefinition with a tpye of eWeaponType.none (the default value)
+        return( new WeaponDefinition() );
+    }
+
 
 }

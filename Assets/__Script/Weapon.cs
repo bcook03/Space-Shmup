@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 /// <summary>
 /// This is an enum of the various possible weapon types.
@@ -44,16 +45,104 @@ public class WeaponDefinition {
 }
 public class Weapon : MonoBehaviour
 {
+    static public Transform PROJECTILE_ANCHOR;
+
+    [Header("DYNAMIC")]
+    [SerializeField]
+    [Tooltip("Setthing this manually while playing does not work properly.")]
+    private eWeaponType _type = eWeaponType.none;
+    public WeaponDefinition def;
+    public float nextShotTime; // Time the Weapon will fire next
+    
+    private GameObject weaponModel;
+    private Transform shotPointTrans;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        // Set up PROJECTILE_ANCOR if it has not already been done
+        if (PROJECTILE_ANCHOR == null) {
+            GameObject go = new GameObject("_ProjectileAnchor");
+            PROJECTILE_ANCHOR = go.transform;
+        }
+
+        shotPointTrans = transform.GetChild(0);
+
+        // Call SetType() for the default _type set in the Inspector
+        SetType(_type);
+
+        // Find the fireEvent of a Hero Component in the parent hierarchy
+        Hero hero = GetComponentInParent<Hero>();
+        if (hero != null) hero.fireEvent += Fire;
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    public eWeaponType tyoe {
+        get {   return(_type);  }
+        set {   SetType(value); }
+    }
+
+    public void SetType(eWeaponType wt) {
+        _type = wt;
+        if (_type == eWeaponType.none) {
+            this.gameObject.SetActive(false);
+            return;
+        }
+        else{
+            this.gameObject.SetActive(true);
+        }
+        // Get the WEaponDefinition for this type from Main
+        def = Main.GET_WEAPON_DEFINITION(_type);
+        // Destroy any old model and then attcah a model for this weapon
+        if(weaponModel!= null) Destroy(weaponModel);
+        weaponModel = Instantiate<GameObject>(def.weaponModelPrefab, transform);
+        weaponModel.transform.localPosition = Vector3.zero;
+        weaponModel.transform.localScale = Vector3.one;
+
+        nextShotTime = 0;   // You can fire immediately after _type is set
+    }    
+
+    private void Fire() {
+        // If this.gameObject is inactive, return
+        if(!gameObject.activeInHierarchy) return;
+        // If it hasn't been enough time between shots, return
+        if(Time.time < nextShotTime) return;
+
+        ProjectileHero p;
+        Vector3 vel = Vector3.up * def.velocity;
+
+        switch(_type) {
+            case eWeaponType.blaster:
+                p = MakeProjectile();
+                p.vel = vel;
+                break;
+
+            case eWeaponType.spread:
+                p = MakeProjectile();
+                p.vel = vel;
+                p = MakeProjectile();
+                p.transform.rotation = Quaternion.AngleAxis(10, Vector3.back);
+                p.vel = p.transform.rotation * vel;
+                p = MakeProjectile();
+                p.transform.rotation = Quaternion.AngleAxis(-10, Vector3.back);
+                p.vel = p.transform.rotation * vel;
+                break;
+
+        }
+    }
+
+    private ProjectileHero MakeProjectile() {
+        GameObject go;
+        go = Instantiate<GameObject>(def.projectilePrefab, PROJECTILE_ANCHOR);
+        ProjectileHero p = go.GetComponent<ProjectileHero>();
+
+        Vector3 pos = shotPointTrans.position;
+        pos.z = 0;
+        p.transform.position = pos;
+
+        p.type = _type;
+        nextShotTime = Time.time + def.delayBetweenShots;
+        return(p);
         
     }
 }
