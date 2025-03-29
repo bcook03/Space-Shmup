@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 7817639879985021274}
   - component: {fileID: 9185519999970266969}
   - component: {fileID: 1992179586318549666}
+  - component: {fileID: 6749030515663937478}
   m_Layer: 0
   m_Name: enemy4_shield_Front
   m_TagString: Untagged
@@ -211,6 +212,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+--- !u!114 &6749030515663937478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893663533348302636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ff88a38eddaf2d4694f6263cbb4cf58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showingColor: 0
+  blinkCompleteTime: 0
+  ignoreOnCollisionEnter: 0
 --- !u!1 &3440084670684215098
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,6 +498,7 @@ GameObject:
   - component: {fileID: 5407094474805554665}
   - component: {fileID: 9185519999970266967}
   - component: {fileID: 8747864665998998860}
+  - component: {fileID: 3132987057831820280}
   m_Layer: 0
   m_Name: enemy4_shield_Right
   m_TagString: Untagged
@@ -592,6 +609,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+--- !u!114 &3132987057831820280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5079837839100941336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ff88a38eddaf2d4694f6263cbb4cf58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showingColor: 0
+  blinkCompleteTime: 0
+  ignoreOnCollisionEnter: 0
 --- !u!1 &5609913661129515232
 GameObject:
   m_ObjectHideFlags: 0
@@ -988,6 +1020,7 @@ GameObject:
   - component: {fileID: 4346281909414164491}
   - component: {fileID: 9185519999970266968}
   - component: {fileID: 2199655503994531377}
+  - component: {fileID: 7301215467698515477}
   m_Layer: 0
   m_Name: enemy4_shield_Left
   m_TagString: Untagged
@@ -1098,6 +1131,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+--- !u!114 &7301215467698515477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9166194616976959728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ff88a38eddaf2d4694f6263cbb4cf58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showingColor: 0
+  blinkCompleteTime: 0
+  ignoreOnCollisionEnter: 0
 --- !u!1 &9185519998980853174
 GameObject:
   m_ObjectHideFlags: 0
@@ -1112,6 +1160,7 @@ GameObject:
   - component: {fileID: 4308677119985892101}
   - component: {fileID: -2548525232747741085}
   - component: {fileID: 4579967538002333409}
+  - component: {fileID: 3193119443363805813}
   m_Layer: 0
   m_Name: Enemy_4
   m_TagString: Untagged
@@ -1196,6 +1245,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b045d9d41daddb43a903573c081fae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
+  fireRate: 0.3
+  health: 10
+  score: 100
+  powerUpDropChance: 1
+  duration: 4
 --- !u!114 &-2548525232747741085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1208,8 +1263,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c80b20b088035f4dbd5853e478627ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boundsType: 0
-  radius: 1
+  boundsType: 1
+  radius: 8
   keepOnScreen: 1
   screenLocs: 0
   camWidth: 0
@@ -1227,3 +1282,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+--- !u!114 &3193119443363805813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9185519998980853174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ff88a38eddaf2d4694f6263cbb4cf58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showingColor: 0
+  blinkCompleteTime: 0
+  ignoreOnCollisionEnter: 0

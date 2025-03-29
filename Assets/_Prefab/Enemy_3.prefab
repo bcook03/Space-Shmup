@@ -101,6 +101,7 @@ MonoBehaviour:
   fireRate: 0.3
   health: 10
   score: 100
+  powerUpDropChance: 0.75
   lifeTime: 5
   midPointYRange: {x: 1.5, y: 3, z: 0}
   drawDebugInfo: 1
@@ -118,8 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c80b20b088035f4dbd5853e478627ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boundsType: 0
-  radius: 1
+  boundsType: 2
+  radius: 3
   keepOnScreen: 1
   screenLocs: 0
   camWidth: 0
@@ -138,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showingColor: 0
   blinkCompleteTime: 0
+  ignoreOnCollisionEnter: 0
 --- !u!1001 &6217192625199160741
 PrefabInstance:
   m_ObjectHideFlags: 0
