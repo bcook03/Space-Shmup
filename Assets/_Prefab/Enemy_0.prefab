@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7536658432222431377}
   - component: {fileID: 6110853522100903603}
   - component: {fileID: 6568609010169526848}
-  - component: {fileID: -6041951481197534904}
+  - component: {fileID: -6349224544585348400}
   m_Layer: 9
   m_Name: Enemy_0
   m_TagString: Untagged
@@ -121,7 +121,8 @@ MonoBehaviour:
   fireRate: 0.3
   health: 10
   score: 100
---- !u!114 &-6041951481197534904
+  powerUpDropChance: 1
+--- !u!114 &-6349224544585348400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showingColor: 0
   blinkCompleteTime: 0
+  ignoreOnCollisionEnter: 0
 --- !u!1001 &2628582809468335639
 PrefabInstance:
   m_ObjectHideFlags: 0

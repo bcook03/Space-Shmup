@@ -1,4 +1,5 @@
-using UnityEditor.VersionControl;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
@@ -10,6 +11,7 @@ public class BlinkColorOnHIt : MonoBehaviour
     [Header("Dynamic")]
     public bool showingColor = false;
     public float blinkCompleteTime; // Time to stop showing the color
+    public bool ignoreOnCollisionEnter = false;
 
     private Material[] materials;
     private Color[] originalColors;
@@ -33,6 +35,7 @@ public class BlinkColorOnHIt : MonoBehaviour
 
     void OnCollisionEnter(Collision coll)
     {
+        if (ignoreOnCollisionEnter) return;
         // Check for collisions with ProjectileHero
         ProjectileHero p = coll.gameObject.GetComponent<ProjectileHero>();
         if(p != null) {
@@ -47,7 +50,7 @@ public class BlinkColorOnHIt : MonoBehaviour
     /// materials array to blinkColor, sets showingColor to true; and sets the
     /// time that the colors should be reverted
     /// </summary>
-    void SetColors() {
+    public void SetColors() {
         foreach (Material m in materials)
             m.color = blinkColor;
 
